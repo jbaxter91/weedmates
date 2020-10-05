@@ -1,7 +1,7 @@
 module.exports = function(sequelize, DataTypes) {
     var WeedStrains = sequelize.define("WeedStrains", {
-      like: {
-        name: DataTypes.STRING,
+      is_liked: {
+        type: DataTypes.BOOLEAN,
         // AllowNull is a flag that restricts a todo from being entered if it doesn't
         // have a text value
         allowNull: false,

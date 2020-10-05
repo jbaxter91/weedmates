@@ -23,6 +23,12 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.STRING
       }
     });
+
+    WeedStrains.associate = function(models) {
+      WeedStrains.hasMany(models.WeedLikes, {
+       });
+     };
+
     return WeedStrains;
   };
   

@@ -19,10 +19,10 @@ var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-// Import routes and give the server access to them.
-var routes = require("./controllers/userController.js");
-
-app.use(routes);
+// Routes
+// =============================================================
+require("./server/routes/api-routes.js")(app);
+require("./server/routes/html-routes.js")(app);
 
 // Start our server so that it can begin listening to client requests.
 db.sequelize.sync({ force: true }).then(function() {

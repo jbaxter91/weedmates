@@ -1,38 +1,18 @@
-<h1>Cats!</h1>
+<h1>Users!</h1>
 
-<h2>Cats that are not sleepy!</h2>
+<h2>Here are all the users</h2>
 
-<ul>
-  {{#each cats}}
-    {{#unless sleepy}}
-      {{> cats/cat-block sleep=true}}
-    {{/unless}}
-  {{/each}}
-</ul>
-
-<h2>Cats that are sleepy!</h2>
-
-<ul>
-  {{#each cats}}
-    {{#if sleepy}}
-      {{> cats/cat-block sleep=false}}
-    {{/if}}
-  {{/each}}
-</ul>
-
-<h2>Add a Cat</h2>
+<h2>Add a User</h2>
 <form class="create-form">
 
   <div class="form-group">
-    <label for="ca">Cat Name:</label>
-    <input type="text" id="ca" name="name">
+    <label for="un_input">UserName:</label>
+    <input type="text" id="un_input" name="User name">
+    <label for="email_input">Email:</label>
+    <input type="text" id="email_input" name="email">
+    <label for="pw_input">Password:</label>
+    <input type="password" id="pw_input" name="password">
   </div>
 
-  <div class="form-group">
-    <label for="sleepy">Sleepy?</label><br>
-    <input type="radio" name="sleepy" value="1" checked> Sleepy!<br>
-    <input type="radio" name="sleepy" value="0"> Awake
-  </div>
-
-  <button type="submit">Add Cat</button>
+  <button type="submit">Add User</button>
 </form>

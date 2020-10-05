@@ -10,14 +10,12 @@ var db = require("../models");
 
 // Routes
 // =============================================================
-module.exports = function(app) {
-
+module.exports = function (app) {
   // GET route for getting all of the posts
-  app.get("/api/users/", function(req, res) {
-    db.Users.findAll({})
-      .then(function(dbPost) {
-        res.json(dbPost);
-      });
+  app.get("/api/users/", function (req, res) {
+    db.Users.findAll({}).then(function (dbPost) {
+      res.json(dbPost);
+    });
   });
 
   // // Get route for returning posts of a specific category
@@ -44,43 +42,42 @@ module.exports = function(app) {
   //     });
   // });
 
-  // POST route for saving a new post
-  app.post("/api/user", function(req, res) {
+  // POST route for saving a new user
+  app.post("/api/user", function (req, res) {
     console.log(req.body);
-    const {username,ip,email,password} = req.body;
+    const { username, ipaddress, email, password } = req.body;
     db.Users.create({
       username,
       email,
       password,
-      ip
-    })
-      .then(function(dbPost) {
-        res.json(dbPost);
-      });
+      ipaddress
+    }).then(function (dbPost) {
+      res.json(dbPost);
+    });
   });
 
-  // DELETE route for deleting posts
-  app.delete("/api/posts/:id", function(req, res) {
-    db.Post.destroy({
-      where: {
-        id: req.params.id
-      }
-    })
-      .then(function(dbPost) {
-        res.json(dbPost);
-      });
-  });
+  // // DELETE route for deleting posts
+  // app.delete("/api/posts/:id", function(req, res) {
+  //   db.Post.destroy({
+  //     where: {
+  //       id: req.params.id
+  //     }
+  //   })
+  //     .then(function(dbPost) {
+  //       res.json(dbPost);
+  //     });
+  // });
 
-  // PUT route for updating posts
-  app.put("/api/posts", function(req, res) {
-    db.Post.update(req.body,
-      {
-        where: {
-          id: req.body.id
-        }
-      })
-      .then(function(dbPost) {
-        res.json(dbPost);
-      });
-  });
+  // // PUT route for updating posts
+  // app.put("/api/posts", function(req, res) {
+  //   db.Post.update(req.body,
+  //     {
+  //       where: {
+  //         id: req.body.id
+  //       }
+  //     })
+  //     .then(function(dbPost) {
+  //       res.json(dbPost);
+  //     });
+  // });
 };

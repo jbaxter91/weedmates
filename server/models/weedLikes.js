@@ -20,6 +20,14 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.STRING
       }
     });
+
+    WeedLikes.associate = function(models){
+      WeedLikes.belongsTo(models.Users, {
+      });
+      WeedLikes.belongsTo(models.WeedStrains, {
+      })
+  }
+
     return WeedLikes;
   };
   

@@ -26,13 +26,18 @@ app.engine('handlebars', exphbs({
 }));
 app.set('view engine', 'handlebars');
 
+var hbs = exphbs.create({});
+hbs.handlebars.registerHelper('json', function(context) {
+  return JSON.stringify(context);
+});
+
 // Routes
 // =============================================================
 require("./server/routes/api-routes.js")(app);
 require("./server/routes/html-routes.js")(app);
 
 // Start our server so that it can begin listening to client requests.
-db.sequelize.sync({ force: true }).then(function () {
+db.sequelize.sync().then(function () {
   app.listen(PORT, function () {
     console.log(`App listening at http://${process.env.DB_HOST}`);
   });

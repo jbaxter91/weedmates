@@ -1,10 +1,13 @@
+
+{{> globals/userportal}}
+{{> globals/liked}}
 <h1>Users!</h1>
 
 <h2>Here are all the users</h2>
 
 <ul>
   {{#each users}}
-      {{> users/user-block}}
+      {{> users/user-block user=this }}
   {{/each}}
 </ul>
 

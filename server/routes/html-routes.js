@@ -14,13 +14,12 @@ module.exports = function (app) {
 
   // index route loads view.html
   app.get("/", function (req, res) {
-    db.Users.findAll({}).then( (data) => {
+    db.Users.findAll({raw: true}).then( (data) => {
       var hbsObject = {
         users: data,
       };
-      console.log('data users', data.Users);
-      console.log('hbsobj', hbsObject);
-      console.log('data', data);
+      console.log("Data:",data);
+      console.log('hbsObject:',hbsObject);
       res.render("index", hbsObject );
     });
   });

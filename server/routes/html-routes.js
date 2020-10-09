@@ -28,6 +28,10 @@ module.exports = function (app) {
     res.render("userportal");
   });
 
+  app.get("/login", function (req, res) {
+    res.render("login");
+  });
+
   // blog route loads blog.html
   app.get("/blog", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/blog.html"));

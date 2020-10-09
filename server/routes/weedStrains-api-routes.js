@@ -12,15 +12,15 @@ var db = require("../models");
 // =============================================================
 module.exports = function (app) {
   // GET route for getting all of the posts
-  app.get("/api/users/", function (req, res) {
-    db.Users.findAll({}).then(function (dbPost) {
+  app.get("/api/weed/", function (req, res) {
+    db.WeedStrains.findAll({}).then(function (dbPost) {
       res.json(dbPost);
     });
   });
 
   // Get route for retrieving a single post
-  app.get("/api/users/:id", function(req, res) {
-    db.Users.findOne({
+  app.get("/api/weed/:id", function(req, res) {
+    db.WeedStrains.findOne({
       where: {
         id: req.params.id
       }
@@ -31,10 +31,10 @@ module.exports = function (app) {
   });
 
   // Get route for retrieving a single post
-  app.get("/api/users/search/:username", function(req, res) {
-    db.Users.findOne({
+  app.get("/api/weed/search/:name", function(req, res) {
+    db.WeedStrains.findOne({
       where: {
-        username: req.params.username
+        name: req.params.name
       }
     })
       .then(function(dbGet) {
@@ -43,10 +43,10 @@ module.exports = function (app) {
   });
 
   // POST route for saving a new user
-  app.post("/api/users", function (req, res) {
+  app.post("/api/Weed", function (req, res) {
     console.log(req.body);
     const { username, ipaddress, email, password } = req.body;
-    db.Users.create({
+    db.WeedStrains.create({
       username,
       email,
       password,
@@ -57,8 +57,8 @@ module.exports = function (app) {
   });
 
   // DELETE route for deleting posts
-  app.delete("/api/users:id", function(req, res) {
-    db.Users.destroy({
+  app.delete("/api/weed/:id", function(req, res) {
+    db.WeedStrains.destroy({
       where: {
         id: req.params.id
       }
@@ -67,17 +67,4 @@ module.exports = function (app) {
         res.json(dbDelete);
       });
   });
-
-  // // PUT route for updating posts
-  // app.put("/api/posts", function(req, res) {
-  //   db.Post.update(req.body,
-  //     {
-  //       where: {
-  //         id: req.body.id
-  //       }
-  //     })
-  //     .then(function(dbPost) {
-  //       res.json(dbPost);
-  //     });
-  // });
 };

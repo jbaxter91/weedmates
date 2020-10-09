@@ -24,8 +24,8 @@ module.exports = function (app) {
     });
   });
 
-  app.get("/cms", function (req, res) {
-    res.sendFile(path.join(__dirname, "../public/cms.html"));
+  app.get("/userportal", function (req, res) {
+    res.render("userportal");
   });
 
   // blog route loads blog.html

@@ -19,27 +19,35 @@ module.exports = function (app) {
   });
 
   // Get route for retrieving a single post
-  app.get("/api/users/:id", function(req, res) {
+  app.get("/api/users/:id", function (req, res) {
     db.Users.findOne({
       where: {
-        id: req.params.id
-      }
-    })
-      .then(function(dbGet) {
-        res.json(dbGet);
+        id: req.params.id,
+      },
+    }).then(function (dbUser) {
+      console.log("YOLO");
+      db.WeedLikes.findAll({
+        where: {
+          UserId: req.params.id,
+        },
+      }).then((dbStrain) => {
+        console.log("MOLO");
+        let userData = dbUser.get({ plain: true });
+        userData.strainsLiked = dbStrain;
+        res.json(userData);
       });
+    });
   });
 
   // Get route for retrieving a single post
-  app.get("/api/users/search/:username", function(req, res) {
+  app.get("/api/users/search/:username", function (req, res) {
     db.Users.findOne({
       where: {
-        username: req.params.username
-      }
-    })
-      .then(function(dbGet) {
-        res.json(dbGet);
-      });
+        username: req.params.username,
+      },
+    }).then(function (dbGet) {
+      res.json(dbGet);
+    });
   });
 
   // POST route for saving a new user
@@ -50,22 +58,21 @@ module.exports = function (app) {
       username,
       email,
       password,
-      ipaddress
+      ipaddress,
     }).then(function (dbPost) {
       res.json(dbPost);
     });
   });
 
   // DELETE route for deleting posts
-  app.delete("/api/users:id", function(req, res) {
+  app.delete("/api/users:id", function (req, res) {
     db.Users.destroy({
       where: {
-        id: req.params.id
-      }
-    })
-      .then(function(dbDelete) {
-        res.json(dbDelete);
-      });
+        id: req.params.id,
+      },
+    }).then(function (dbDelete) {
+      res.json(dbDelete);
+    });
   });
 
   // // PUT route for updating posts

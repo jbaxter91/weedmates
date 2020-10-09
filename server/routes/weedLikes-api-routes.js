@@ -12,15 +12,15 @@ var db = require("../models");
 // =============================================================
 module.exports = function (app) {
   // GET route for getting all of the posts
-  app.get("/api/weed/", function (req, res) {
-    db.WeedStrains.findAll({}).then(function (dbGet) {
+  app.get("/api/weedlikes/", function (req, res) {
+    db.WeedLikes.findAll({}).then(function (dbGet) {
       res.json(dbGet);
     });
   });
 
   // Get route for retrieving a single post
-  app.get("/api/weed/:id", function(req, res) {
-    db.WeedStrains.findOne({
+  app.get("/api/weedlikes/:id", function(req, res) {
+    db.WeedLikes.findOne({
       where: {
         id: req.params.id
       }
@@ -31,10 +31,22 @@ module.exports = function (app) {
   });
 
   // Get route for retrieving a single post
-  app.get("/api/weed/search/:name", function(req, res) {
-    db.WeedStrains.findOne({
+  app.get("/api/weedlikes/user/:UserId", function(req, res) {
+    db.WeedLikes.findAll({
       where: {
-        name: req.params.name
+        UserId: req.params.UserId
+      }
+    })
+      .then(function(dbGet) {
+        res.json(dbGet);
+      });
+  });
+
+  // Get route for retrieving a single post
+  app.get("/api/weedlikes/search/:rating", function(req, res) {
+    db.WeedLikes.findAll({
+      where: {
+        rating: req.params.rating
       }
     })
       .then(function(dbGet) {
@@ -43,15 +55,14 @@ module.exports = function (app) {
   });
 
   // POST route for saving a new user
-  app.post("/api/weed", function (req, res) {
+  app.post("/api/weedlikes", function (req, res) {
     console.log(req.body);
-    const { name, medical_use, positive_effects, negitive_effects, flavor} = req.body;
-    db.WeedStrains.create({
-      name,
-      medical_use,
-      positive_effects,
-      negitive_effects,
-      flavor
+    const { rating, UserId, WeedStrainId } = req.body;
+    db.WeedLikes.create({
+      rating,
+      UserId,
+      WeedStrainId
+
     }).then(function (dbPost) {
       res.json(dbPost);
     });
@@ -59,7 +70,7 @@ module.exports = function (app) {
 
   // // DELETE route for deleting posts
   // app.delete("/api/weed/:id", function(req, res) {
-  //   db.WeedStrains.destroy({
+  //   db.WeedLikes.destroy({
   //     where: {
   //       id: req.params.id
   //     }

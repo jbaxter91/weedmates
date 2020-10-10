@@ -2,7 +2,7 @@ var express = require("express");
 
 var PORT = process.env.PORT || 8080;
 
-var path = require('path');
+var path = require("path");
 
 var app = express();
 
@@ -16,18 +16,21 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Set Handlebars.
-app.set('views', path.join( __dirname + '/server/views'));
+app.set("views", path.join(__dirname + "/server/views"));
 
-var exphbs = require('express-handlebars');
-app.engine('handlebars', exphbs({
-        defaultLayout: 'main',
-        layoutsDir: path.join( __dirname + '/server/views/layouts'),
-        partialsDir:path.join( __dirname + '/server/views/partials')
-}));
-app.set('view engine', 'handlebars');
+var exphbs = require("express-handlebars");
+app.engine(
+  "handlebars",
+  exphbs({
+    defaultLayout: "main",
+    layoutsDir: path.join(__dirname + "/server/views/layouts"),
+    partialsDir: path.join(__dirname + "/server/views/partials"),
+  })
+);
+app.set("view engine", "handlebars");
 
 var hbs = exphbs.create({});
-hbs.handlebars.registerHelper('json', function(context) {
+hbs.handlebars.registerHelper("json", function (context) {
   return JSON.stringify(context);
 });
 
@@ -35,10 +38,13 @@ hbs.handlebars.registerHelper('json', function(context) {
 // =============================================================
 require("./server/routes/api-routes.js")(app);
 require("./server/routes/html-routes.js")(app);
+require("./server/routes/users-api-routes.js")(app);
+require("./server/routes/weedLikes-api-routes.js")(app);
+require("./server/routes/weedStrains-api-routes.js")(app);
 
 // Start our server so that it can begin listening to client requests.
-db.sequelize.sync().then(function () {
+db.sequelize.sync({force:true}).then(function () {
   app.listen(PORT, function () {
-    console.log(`App listening at http://${process.env.DB_HOST}`);
+    console.log(`App listening at http://${process.env.DB_HOST}:8080`);
   });
 });

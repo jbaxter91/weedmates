@@ -32,6 +32,10 @@ module.exports = function (app) {
     res.render("login");
   });
 
+  app.get("/create-account", function (req, res) {
+    res.render("create-account");
+  });
+  
   // blog route loads blog.html
   app.get("/blog", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/blog.html"));

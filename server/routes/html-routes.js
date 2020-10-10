@@ -24,10 +24,18 @@ module.exports = function (app) {
     });
   });
 
-  app.get("/cms", function (req, res) {
-    res.sendFile(path.join(__dirname, "../public/cms.html"));
+  app.get("/userportal", function (req, res) {
+    res.render("userportal");
   });
 
+  app.get("/login", function (req, res) {
+    res.render("login");
+  });
+
+  app.get("/create-account", function (req, res) {
+    res.render("create-account");
+  });
+  
   // blog route loads blog.html
   app.get("/blog", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/blog.html"));

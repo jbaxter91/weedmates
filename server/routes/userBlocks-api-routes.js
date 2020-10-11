@@ -12,34 +12,15 @@ var db = require("../models");
 // =============================================================
 module.exports = function (app) {
   // GET route for getting all of the posts
-  app.get("/api/users/", function (req, res) {
-    db.Users.findAll({}).then(function (dbPost) {
+  app.get("/api/blocks/:userID", function (req, res) {
+    db.UserBlocks.findAll({where:{initiator_user_id: req.params.userID}}).then(function (dbPost) {
       res.json(dbPost);
     });
   });
 
   // Get route for retrieving a single post
-  app.get("/api/users/:id", function (req, res) {
-    db.Users.findOne({
-      where: {
-        id: req.params.id,
-      },
-    }).then(function (dbUser) {
-      db.WeedLikes.findAll({
-        where: {
-          UserId: req.params.id,
-        },
-      }).then((dbStrain) => {
-        let userData = dbUser.get({ plain: true });
-        userData.strainsLiked = dbStrain;
-        res.json(userData);
-      });
-    });
-  });
-
-  // Get route for retrieving a single post
-  app.get("/api/users/search/:username", function (req, res) {
-    db.Users.findOne({
+  app.get("/api/blocks/search/:username", function (req, res) {
+    db.UserBlocks.findOne({
       where: {
         username: req.params.username,
       },
@@ -49,21 +30,19 @@ module.exports = function (app) {
   });
 
   // POST route for saving a new user
-  app.post("/api/users", function (req, res) {
+  app.post("/api/blocks", function (req, res) {
     console.log(req.body);
-    const { username, ipaddress, email, password } = req.body;
+    const { initiator_user_id,  target_user_id} = req.body;
     db.Users.create({
-      username,
-      email,
-      password,
-      ipaddress,
+      initiator_user_id,
+      target_user_id
     }).then(function (dbPost) {
       res.json(dbPost);
     });
   });
 
   // DELETE route for deleting posts
-  app.delete("/api/users:id", function (req, res) {
+  app.delete("/api/blocks/:id", function (req, res) {
     db.Users.destroy({
       where: {
         id: req.params.id,

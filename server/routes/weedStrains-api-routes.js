@@ -18,40 +18,48 @@ module.exports = function (app) {
     });
   });
 
-  // Get route for retrieving a single post
-  app.get("/api/weed/:id", function(req, res) {
-    db.WeedStrains.findOne({
-      where: {
-        id: req.params.id
-      }
-    })
-      .then(function(dbGet) {
-        res.json(dbGet);
-      });
+  app.get("/api/weed/count", function (req, res) {
+    db.WeedStrains.findAll({}).then(function (dbGet) {
+      var strains = dbGet.length;
+      console.log("Strins Object:", strains);
+      // console.log("WeedCount:", strains.count);
+      res.json(dbGet);
+    });
   });
 
   // Get route for retrieving a single post
-  app.get("/api/weed/search/:name", function(req, res) {
+  app.get("/api/weed/:id", function (req, res) {
     db.WeedStrains.findOne({
       where: {
-        name: req.params.name
-      }
-    })
-      .then(function(dbGet) {
-        res.json(dbGet);
-      });
+        id: req.params.id,
+      },
+    }).then(function (dbGet) {
+      res.json(dbGet);
+    });
+  });
+
+  // Get route for retrieving a single post
+  app.get("/api/weed/search/:name", function (req, res) {
+    db.WeedStrains.findOne({
+      where: {
+        name: req.params.name,
+      },
+    }).then(function (dbGet) {
+      res.json(dbGet);
+    });
   });
 
   // POST route for saving a new user
   app.post("/api/weed", function (req, res) {
     console.log(req.body);
-    const { name, medical_use, positive_effects, negitive_effects, flavor} = req.body;
+    const { name, race, medical, positive, negative, flavors } = req.body;
     db.WeedStrains.create({
       name,
-      medical_use,
-      positive_effects,
-      negitive_effects,
-      flavor
+      race,
+      medical,
+      positive,
+      negative,
+      flavors,
     }).then(function (dbPost) {
       res.json(dbPost);
     });

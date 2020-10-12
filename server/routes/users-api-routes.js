@@ -25,13 +25,11 @@ module.exports = function (app) {
         id: req.params.id,
       },
     }).then(function (dbUser) {
-      console.log("YOLO");
       db.WeedLikes.findAll({
         where: {
           UserId: req.params.id,
         },
       }).then((dbStrain) => {
-        console.log("MOLO");
         let userData = dbUser.get({ plain: true });
         userData.strainsLiked = dbStrain;
         res.json(userData);
@@ -52,7 +50,6 @@ module.exports = function (app) {
 
   // POST route for saving a new user
   app.post("/api/users", function (req, res) {
-    console.log(req.body);
     const { username, ipaddress, email, password } = req.body;
     db.Users.create({
       username,
@@ -75,16 +72,16 @@ module.exports = function (app) {
     });
   });
 
-  // // PUT route for updating posts
-  // app.put("/api/posts", function(req, res) {
-  //   db.Post.update(req.body,
-  //     {
-  //       where: {
-  //         id: req.body.id
-  //       }
-  //     })
-  //     .then(function(dbPost) {
-  //       res.json(dbPost);
-  //     });
-  // });
+  // PUT route for updating posts
+  app.put("/api/users/location", function(req, res) {
+    db.Users.update(req.body,
+      {
+        where: {
+          id: req.body.id
+        }
+      })
+      .then(function(dbPost) {
+        res.json(dbPost);
+      });
+  });
 };

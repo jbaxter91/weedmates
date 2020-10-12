@@ -1,12 +1,13 @@
-module.exports = function(sequelize, DataTypes) {
-    var UserBlocks = sequelize.define("UserBlocks", {
-      block_message: {
-        type: DataTypes.STRING,
-      },
-      //Forign key to user who did the blocking
+module.exports = function (sequelize, DataTypes) {
+  var UserBlocks = sequelize.define("UserBlocks", {
+    block_message: {
+      type: DataTypes.STRING,
+    },
+  });
 
-      //forign key to target of the block
-    });
-    return UserBlocks;
+  UserBlocks.associate = function (models) {
+    UserBlocks.belongsTo(models.Users, { foreignKey: "initiator_user_id" });
+    UserBlocks.belongsTo(models.Users, { foreignKey: "target_user_id" });
   };
-  
+  return UserBlocks;
+};

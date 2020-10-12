@@ -7,6 +7,9 @@
 var path = require("path");
 var db = require("../models");
 
+// Requiring our custom middleware for checking if a user is logged in
+var isAuthenticated = require("../config/middleware/isAuthenticated");
+
 // Routes
 // =============================================================
 module.exports = function (app) {
@@ -14,6 +17,14 @@ module.exports = function (app) {
 
   // index route loads view.html
   app.get("/", function (req, res) {
+
+    if(!req.user) 
+    {
+      //User is not logged in so we need them to log in
+      res.render("login");
+      return;
+    }
+
     db.Users.findAll({raw: true}).then( (data) => {
       var hbsObject = {
         users: data,
@@ -24,7 +35,8 @@ module.exports = function (app) {
     });
   });
 
-  app.get("/userportal", function (req, res) {
+  app.get("/userportal",isAuthenticated, function (req, res) {
+    console.log(req.user);
     res.render("userportal");
   });
 
@@ -32,7 +44,7 @@ module.exports = function (app) {
     res.render("login");
   });
 
-  app.get("/create-account", function (req, res) {
+  app.get("/create", function (req, res) {
     res.render("create-account");
   });
   

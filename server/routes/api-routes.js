@@ -8,6 +8,8 @@
 // Requiring our Todo model
 var db = require("../models");
 
+var passport = require("../config/passport");
+
 // Routes
 // =============================================================
 module.exports = function (app) {
@@ -17,6 +19,38 @@ module.exports = function (app) {
   //     res.json(dbPost);
   //   });
   // });
+
+  // Using the passport.authenticate middleware with our local strategy.
+  // If the user has valid login credentials, send them to the members page.
+  // Otherwise the user will be sent an error
+  app.post("/api/login", passport.authenticate("local"), function (req, res) {
+    res.json(req.user);
+  });
+
+  app.post("/api/signup", function(req, res) {
+    console.log("Trying to create user");
+    console.log(req.body);
+    db.Users.create({
+      email: req.body.email,
+      password: req.body.password,
+      username: req.body.username,
+
+    })
+      .then(function() {
+        console.log("Redirecting");
+        res.redirect(307, "/api/login");
+      })
+      .catch(function(err) {
+        console.log("Error:", err);
+        res.status(401).json(err);
+      });
+  });
+
+  // Route for logging user out
+  app.get("/logout", function(req, res) {
+    req.logout();
+    res.redirect("/");
+  });
 
   // // Get route for retrieving a single post
   // app.get("/api/users/:id", function(req, res) {

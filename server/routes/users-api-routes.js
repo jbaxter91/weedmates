@@ -50,7 +50,6 @@ module.exports = function (app) {
 
   // POST route for saving a new user
   app.post("/api/users", function (req, res) {
-    console.log(req.body);
     const { username, ipaddress, email, password } = req.body;
     db.Users.create({
       username,
@@ -73,16 +72,16 @@ module.exports = function (app) {
     });
   });
 
-  // // PUT route for updating posts
-  // app.put("/api/posts", function(req, res) {
-  //   db.Post.update(req.body,
-  //     {
-  //       where: {
-  //         id: req.body.id
-  //       }
-  //     })
-  //     .then(function(dbPost) {
-  //       res.json(dbPost);
-  //     });
-  // });
+  // PUT route for updating posts
+  app.put("/api/users/location", function(req, res) {
+    db.Users.update(req.body,
+      {
+        where: {
+          id: req.body.id
+        }
+      })
+      .then(function(dbPost) {
+        res.json(dbPost);
+      });
+  });
 };

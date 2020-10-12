@@ -2,7 +2,7 @@ var express = require("express");
 
 var session = require("express-session");
 
-require('dotenv').config()
+require("dotenv").config();
 var PORT = process.env.PORT || process.env.DB_PORT;
 
 var path = require("path");
@@ -51,8 +51,6 @@ hbs.handlebars.registerHelper("json", function (context) {
 require("./server/routes/api-routes.js")(app);
 require("./server/routes/html-routes.js")(app);
 require("./server/routes/users-api-routes.js")(app);
-require("./server/routes/weedLikes-api-routes.js")(app);
-require("./server/routes/weedStrains-api-routes.js")(app);
 
 // Start our server so that it can begin listening to client requests.
 db.sequelize

@@ -17,25 +17,15 @@ module.exports = function (app) {
 
   // index route loads view.html
   app.get("/", function (req, res) {
-
-    if(!req.user) 
-    {
+    if (!req.user) {
       //User is not logged in so we need them to log in
       res.render("login");
       return;
     }
-
-    db.Users.findAll({raw: true}).then( (data) => {
-      var hbsObject = {
-        users: data,
-      };
-      console.log("Data:",data);
-      console.log('hbsObject:',hbsObject);
-      res.render("index", hbsObject );
-    });
+    //res.render("My Profile")
   });
 
-  app.get("/userportal",isAuthenticated, function (req, res) {
+  app.get("/userportal", isAuthenticated, function (req, res) {
     console.log(req.user);
     res.render("userportal");
   });
@@ -47,9 +37,23 @@ module.exports = function (app) {
   app.get("/create", function (req, res) {
     res.render("create-account");
   });
-  
+
   // blog route loads blog.html
-  app.get("/blog", function (req, res) {
-    res.sendFile(path.join(__dirname, "../public/blog.html"));
+  app.get("/:username", function (req, res) {
+    if (!req.user) {
+      //User is not logged in so we need them to log in
+      res.render("login");
+      return;
+    } else {
+      //We ultimatly want to return the handlebars for the
+      //profile display
+      db.Users.findOne({
+        where: {
+          username: req.params.username,
+        },
+      }).then(function (dbGet) {
+        res.json(dbGet);
+      });
+    }
   });
 };

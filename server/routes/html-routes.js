@@ -52,7 +52,30 @@ module.exports = function (app) {
           username: req.params.username,
         },
       }).then(function (dbGet) {
-        res.json(dbGet);
+        let {
+          id,
+          username,
+          email,
+          weed_pref,
+          description,
+          city,
+          state,
+          country,
+          lat,
+          lon,
+        } = dbGet;
+        res.json({
+          id,
+          username,
+          email,
+          weed_pref,
+          description,
+          city,
+          state,
+          country,
+          lat,
+          lon,
+        });
       });
     }
   });

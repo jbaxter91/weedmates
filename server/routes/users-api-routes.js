@@ -18,6 +18,8 @@ module.exports = function (app) {
   //   });
   // });
 
+  
+
   // Get route for retrieving a single post
   app.get("/api/user-data", function (req, res) {
     if (!req.user) {
@@ -26,7 +28,12 @@ module.exports = function (app) {
     } else {
       // Otherwise send back the user's email and id
       // Sending back a password, even a hashed password, isn't a good idea
-      db.Users.findOne({ where: { id: req.user.id } }).then(function (dbUser) {
+      db.Users.findOne({
+        // include: [{
+        //   model: UserRatings // will create a left join
+        // }],
+        where: { id: req.user.id },
+      }).then(function (dbUser) {
         let {
           username,
           weed_pref,
@@ -51,39 +58,20 @@ module.exports = function (app) {
     }
   });
 
-  // Get route for retrieving a single post
-  app.get("/api/users/search/:username", function (req, res) {
-    db.Users.findOne({
-      where: {
-        username: req.params.username,
-      },
-    }).then(function (dbGet) {
-      res.json(dbGet);
-    });
-  });
-
-  // POST route for saving a new user
-  app.post("/api/users", function (req, res) {
-    const { username, ipaddress, email, password } = req.body;
-    db.Users.create({
-      username,
-      email,
-      password,
-      ipaddress,
-    }).then(function (dbPost) {
-      res.json(dbPost);
-    });
-  });
-
   // DELETE route for deleting posts
-  app.delete("/api/users:id", function (req, res) {
-    db.Users.destroy({
-      where: {
-        id: req.params.id,
-      },
-    }).then(function (dbDelete) {
-      res.json(dbDelete);
-    });
+  app.delete("/api/user-data", function (req, res) {
+    if (!req.user) {
+      // The user is not logged in, send back an empty object
+      res.json({});
+    } else if (req.user.id == req.body.id) {
+      db.Users.destroy({
+        where: {
+          id: req.params.id,
+        },
+      }).then(function (dbDelete) {
+        res.json(dbDelete);
+      });
+    }
   });
 
   // PUT route for updating posts

@@ -29,7 +29,7 @@ module.exports = function (app) {
       });
   });
 
-  app.get("/api/get-matchs", (req, res) => {
+  app.get("/api/matches", (req, res) => {
     if (!req.user) {
       // The user is not logged in, send back an empty object
       res.json({});
@@ -48,7 +48,7 @@ module.exports = function (app) {
             target_user_id: req.user.id,
             rating: { [Op.gte]: 1 }, // square brackets are needed for property names that aren't plain string}
           },
-          attributes: ["rating", "initiator_user_id", "target_user_id"],
+          attributes: ["initiator_user_id", "target_user_id"],
         }).then((target_data) => {
           let init_array = [];
           for (let i = 0; i < initiator_data.length; i++) {

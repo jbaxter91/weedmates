@@ -15,7 +15,8 @@ var isAuthenticated = require("../config/middleware/isAuthenticated");
 module.exports = function (app) {
   // Each of the below routes just handles the HTML page that the user gets sent to.
 
-  // index route loads view.html
+  //if the user is not logged in we want them to log in so we can make sure they are 21
+  //if they are logged in we will take them to the user portal
   app.get("/", function (req, res) {
     if (!req.user) {
       //User is not logged in so we need them to log in
@@ -23,15 +24,22 @@ module.exports = function (app) {
       return;
     }
     //res.render("My Profile")
+    res.render("userportal");
   });
 
   app.get("/userportal", isAuthenticated, function (req, res) {
-    console.log(req.user);
     res.render("userportal");
   });
 
   app.get("/login", function (req, res) {
-    res.render("login");
+    if (!req.user) {
+      //User is not logged in so we need them to log in
+      res.render("login");
+      
+      return;
+    } else {
+      res.render("userportal");
+    }
   });
 
   app.get("/create", function (req, res) {
@@ -79,4 +87,7 @@ module.exports = function (app) {
       });
     }
   });
+
+  
+
 };

@@ -35,7 +35,7 @@ module.exports = function (app) {
     if (!req.user) {
       //User is not logged in so we need them to log in
       res.render("login");
-      
+
       return;
     } else {
       res.render("userportal");
@@ -44,6 +44,14 @@ module.exports = function (app) {
 
   app.get("/create", function (req, res) {
     res.render("create-account");
+  });
+
+  app.get("/profile", isAuthenticated, function (req, res) {
+    if (req.user.id == req.body.id) {
+      res.render("profileEdit",{Authenticated: true});
+    }else{
+      res.render("profileEdit",{Authenticated: false});
+    }
   });
 
   // blog route loads blog.html
@@ -88,6 +96,6 @@ module.exports = function (app) {
     }
   });
 
-  
+
 
 };

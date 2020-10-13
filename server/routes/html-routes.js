@@ -15,41 +15,79 @@ var isAuthenticated = require("../config/middleware/isAuthenticated");
 module.exports = function (app) {
   // Each of the below routes just handles the HTML page that the user gets sent to.
 
-  // index route loads view.html
+  //if the user is not logged in we want them to log in so we can make sure they are 21
+  //if they are logged in we will take them to the user portal
   app.get("/", function (req, res) {
-
-    if(!req.user) 
-    {
+    if (!req.user) {
       //User is not logged in so we need them to log in
       res.render("login");
       return;
     }
-
-    db.Users.findAll({raw: true}).then( (data) => {
-      var hbsObject = {
-        users: data,
-      };
-      console.log("Data:",data);
-      console.log('hbsObject:',hbsObject);
-      res.render("index", hbsObject );
-    });
+    //res.render("My Profile")
+    res.render("userportal");
   });
 
-  app.get("/userportal",isAuthenticated, function (req, res) {
-    console.log(req.user);
+  app.get("/userportal", isAuthenticated, function (req, res) {
     res.render("userportal");
   });
 
   app.get("/login", function (req, res) {
-    res.render("login");
+    if (!req.user) {
+      //User is not logged in so we need them to log in
+      res.render("login");
+      
+      return;
+    } else {
+      res.render("userportal");
+    }
   });
 
   app.get("/create", function (req, res) {
     res.render("create-account");
   });
-  
+
   // blog route loads blog.html
-  app.get("/blog", function (req, res) {
-    res.sendFile(path.join(__dirname, "../public/blog.html"));
+  app.get("/:username", function (req, res) {
+    if (!req.user) {
+      //User is not logged in so we need them to log in
+      res.render("login");
+      return;
+    } else {
+      //We ultimatly want to return the handlebars for the
+      //profile display
+      db.Users.findOne({
+        where: {
+          username: req.params.username,
+        },
+      }).then(function (dbGet) {
+        let {
+          id,
+          username,
+          email,
+          weed_pref,
+          description,
+          city,
+          state,
+          country,
+          lat,
+          lon,
+        } = dbGet;
+        res.json({
+          id,
+          username,
+          email,
+          weed_pref,
+          description,
+          city,
+          state,
+          country,
+          lat,
+          lon,
+        });
+      });
+    }
   });
+
+  
+
 };

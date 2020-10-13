@@ -5,11 +5,12 @@ module.exports = function (sequelize, DataTypes) {
   var Users = sequelize.define("Users", {
     username: {
       type: DataTypes.STRING,
-      // AllowNull is a flag that restricts a todo from being entered if it doesn't
-      // have a text value
       allowNull: false,
-      // len is a validation that checks that our todo is between 1 and 140 characters
       validate: {
+        is: {
+          args: /(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/,
+          msg: "Must be only letters, '_', or '.'",
+        },
         len: [1, 35],
       },
       unique: {
@@ -31,6 +32,28 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    weed_pref: {
+      type: DataTypes.ENUM,
+      defaultValue: "none",
+      values: ["indica", "sativa", "hybrid", "all", "none"],
+    },
+    description: {
+      type: DataTypes.STRING,
+      validate: {
+        len: [0, 255],
+      },
+    },
+    city: {
+      type: DataTypes.STRING,
+    },
+    state: {
+      type: DataTypes.STRING,
+    },
+    country: {
+      type: DataTypes.STRING,
+    },
+    //https://geocode.xyz/api
+    //https://geocode.xyz/lat,lon?geoit=json
     lat: {
       type: DataTypes.FLOAT,
     },
@@ -54,7 +77,6 @@ module.exports = function (sequelize, DataTypes) {
   });
 
   Users.associate = (models) => {
-    Users.hasMany(models.WeedLikes, {});
     Users.hasMany(models.UserRatings, { foreignKey: "initiator_user_id" });
     Users.hasMany(models.UserRatings, { foreignKey: "target_user_id" });
 

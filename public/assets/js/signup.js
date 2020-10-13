@@ -5,6 +5,7 @@ $(document).ready(function() {
     var passwordInput = $("input#password-input");
     var usernameInput = $("input#uname-input");
     var firstNameInput = $("input#fname-input");
+    
   
     // When the signup button is clicked, we validate the email and password are not blank
     signUpForm.on("submit", function(event) {

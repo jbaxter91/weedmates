@@ -46,6 +46,17 @@ module.exports = function (app) {
     res.render("create-account");
   });
 
+  app.get("/WeedMates", function (req, res) {
+    res.render("findAmate");
+  });
+
+  app.get("/AboutUs", function (req, res) {
+    res.render("landingPage");
+  });
+  
+
+
+
   app.get("/profile", isAuthenticated, function (req, res) {
     if (req.user.id == req.body.id) {
       res.render("profileEdit",{Authenticated: true});

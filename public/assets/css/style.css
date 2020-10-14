@@ -17,3 +17,34 @@ li {
 .form-group {
   margin-bottom: 5px;
 }
+#johnIMG{
+  max-width: 282px;
+  max-height: 282px;
+}
+#crystalIMG{
+  max-width: 282px;
+  max-height: 282px;
+}
+#body{
+  background-image: url("https://allhdwallpapers.com/wp-content/uploads/2018/12/beautiful-weed-plants.jpeg");
+  background-size: cover;
+}
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 2.5rem;    /* Footer height */
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;            /* Footer height */
+}
+/* .jumbotron { */
+  /* background-image: url(''); */
+  /* background-size: cover; */
+/* } */

@@ -44,6 +44,7 @@ module.exports = function (app) {
       }).then((initiator_data) => {
         //Gets all user ratings where the current user is the target
         db.UserRatings.findAll({
+          include: [db.Users],
           where: {
             target_user_id: req.user.id,
             rating: { [Op.gte]: 1 }, // square brackets are needed for property names that aren't plain string}

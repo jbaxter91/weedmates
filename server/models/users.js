@@ -33,9 +33,8 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false,
     },
     weed_pref: {
-      type: DataTypes.ENUM,
-      defaultValue: "none",
-      values: ["indica", "sativa", "hybrid", "all", "none"],
+      type: DataTypes.STRING,
+      defaultValue: "Indica,Sativa,Hybrid",
     },
     description: {
       type: DataTypes.STRING,

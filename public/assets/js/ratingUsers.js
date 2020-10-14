@@ -48,13 +48,13 @@ function rebuildUser() {
     }).then(
         function (result) {
             if(result.username){
+                $("#userPortal").removeClass("d-none")
                 title_ele.attr("data-id", result.id);
                 title_ele.html(result.username);
                 user_description_ele.html(result.description);
                 weed_Pref_ele.html(result.weed_pref);
 
             }else{
-                $("#userPortal").addClass("d-none")
                 $("#failResult").removeClass("d-none")
             }
 

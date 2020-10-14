@@ -53,15 +53,12 @@ module.exports = function (app) {
   app.get("/AboutUs", function (req, res) {
     res.render("landingPage");
   });
-  
-
-
 
   app.get("/profile", isAuthenticated, function (req, res) {
-    if (req.user.id == req.body.id) {
-      res.render("profileEdit",{Authenticated: true});
-    }else{
-      res.render("profileEdit",{Authenticated: false});
+    if (req.user.id) {
+      res.render("profileEdit", { Authenticated: true, userID: req.user.id });
+    } else {
+      res.render("profileEdit", { Authenticated: false, userID: req.user.id });
     }
   });
 
@@ -106,7 +103,4 @@ module.exports = function (app) {
       });
     }
   });
-
-
-
 };

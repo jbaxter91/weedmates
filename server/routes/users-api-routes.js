@@ -114,9 +114,8 @@ module.exports = function (app) {
       // The user is not logged in, send back an empty object
       res.json({});
     } else if (req.user.id == req.body.id) {
-      db.Users.update(req.body, { where: { id: req.user.id } }).then(function (
-        dbUser
-      ) {
+      db.Users.update(req.body, { where: { id: req.user.id } })
+      .then(function (dbUser) {
         res.json(dbUser);
       });
     } else {

@@ -1,3 +1,4 @@
+<div id="userID" data-id="{{userID}}"></div>
 <div class="bg-info">
     <div class="container bg-secondary">
         <div id="userDemo" class="d-flex justify-content-left" style="height: 150px; width:150px">
@@ -5,14 +6,14 @@
         </div>
         <div>
             <p id="username"> UserName</p>
-            <input {{#if Authenticated}} readonly {{/if}} id="usernameInput">
+            <input {{#unless Authenticated}} readonly {{/unless}} id="usernameInput">
         </div><br>
         <div>
             <p id="location"> Location</p>
-            <input {{#if Authenticated}} readonly {{/if}} id="locationInput">
+            <input {{#unless Authenticated}} readonly {{/unless}} id="locationInput">
         </div><br>
-        <div id="description">
-            <textarea {{#if Authenticated}} readonly {{/if}}> Please add a breif Description of yourself here ...</textarea>
+        <div>
+            <textarea id="descInput" {{#unless Authenticated}} readonly {{/unless}}> Please add a breif Description of yourself here ...</textarea>
         </div>
         <div id="weedPref">
             <input type="checkbox" id="weed1" name="strain1" value="Sativa">
@@ -21,9 +22,10 @@
             <label for="strain2"> Indica</label><br>
             <input type="checkbox" id="weed3" name="strain3" value="Hybrid">
             <label for="strain3"> Hybrid</label><br>
-            <input type="checkbox" id="weed3" name="strain3" value="Hybrid">
-            <label for="strain3"> Sativa/Indica/Hybrid</label><br>
         </div>
-        <button class="btn-primary justify-content-center">Save</button>
+        <button id="saveBtn" class="btn-primary justify-content-center">Save</button>
     </div>
 </div>
+
+<script src="/assets/js/userprofile.js"></script>
+<script src="/assets/js/location.js"></script>

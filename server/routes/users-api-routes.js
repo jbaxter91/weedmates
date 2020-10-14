@@ -8,6 +8,8 @@
 // Requiring our Todo model
 var db = require("../models");
 
+var Sequelize = require("sequelize");
+
 // Routes
 // =============================================================
 module.exports = function (app) {
@@ -18,7 +20,41 @@ module.exports = function (app) {
   //   });
   // });
 
-  
+  // Get route for retrieving a single post
+  app.get("/api/next-user", function (req, res) {
+    if (!req.user) {
+      // The user is not logged in, send back an empty object
+      res.json({});
+    } else {
+      // Otherwise send back the user's email and id
+      // Sending back a password, even a hashed password, isn't a good idea
+      db.UserRatings.findAll({
+        where: { initiator_user_id: req.user.id },
+      }).then(function (dbUser) {
+        const Op = Sequelize.Op;
+        let ratedAlready = [req.user.id];
+        for (let i = 0; i < dbUser.length; i++) {
+          ratedAlready.push(dbUser[i].target_user_id);
+        }
+        console.log("RATED", ratedAlready);
+        db.Users.findOne({
+          where: {
+            id: {
+              [Op.notIn]: ratedAlready,
+            },
+          },
+          order: [
+            ["lat", "DESC"],
+            ["lon", "ASC"],
+          ],
+        }).then((nextMatch) => {
+          //console.log("NEXT MATCH:", nextMatch);
+          if (nextMatch) res.json(nextMatch);
+          else res.json({});
+        });
+      });
+    }
+  });
 
   // Get route for retrieving a single post
   app.get("/api/user-data", function (req, res) {
@@ -29,9 +65,7 @@ module.exports = function (app) {
       // Otherwise send back the user's email and id
       // Sending back a password, even a hashed password, isn't a good idea
       db.Users.findOne({
-        // include: [{
-        //   model: UserRatings // will create a left join
-        // }],
+        include: [db.UserRatings],
         where: { id: req.user.id },
       }).then(function (dbUser) {
         let {

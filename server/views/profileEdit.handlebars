@@ -1,0 +1,27 @@
+<div class="bg-info">
+    <div class="container bg-secondary">
+        <div id="userDemo" class="d-flex justify-content-left" style="height: 150px; width:150px">
+            <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png" alt="Card image cap" class="">
+        </div>
+        <div>
+            <p id="username"> UserName</p>
+            <input {{#if Authenticated}} readonly {{/if}} id="usernameInput">
+        </div><br>
+        <div>
+            <p id="location"> Location</p>
+            <input {{#if Authenticated}} readonly {{/if}} id="locationInput">
+        </div><br>
+        <div id="description">
+            <textarea {{#if Authenticated}} readonly {{/if}}> Please add a breif Description of yourself here ...</textarea>
+        </div>
+        <div id="weedPref">
+            <input type="checkbox" id="weed1" name="strain1" value="Sativa">
+            <label for="strain1"> Sativa</label><br>
+            <input type="checkbox" id="weed2" name="strain2" value="Indica">
+            <label for="strain2"> Indica</label><br>
+            <input type="checkbox" id="weed3" name="strain3" value="Hybrid">
+            <label for="strain3"> Hybrid</label><br>
+        </div>
+        <button class="btn-primary justify-content-center">Save</button>
+    </div>
+</div>

@@ -63,44 +63,15 @@ module.exports = function (app) {
   });
 
   // blog route loads blog.html
-  app.get("/:username", function (req, res) {
-    if (!req.user) {
-      //User is not logged in so we need them to log in
-      res.render("login");
-      return;
-    } else {
-      //We ultimatly want to return the handlebars for the
-      //profile display
-      db.Users.findOne({
-        where: {
-          username: req.params.username,
-        },
-      }).then(function (dbGet) {
-        let {
-          id,
-          username,
-          email,
-          weed_pref,
-          description,
-          city,
-          state,
-          country,
-          lat,
-          lon,
-        } = dbGet;
-        res.json({
-          id,
-          username,
-          email,
-          weed_pref,
-          description,
-          city,
-          state,
-          country,
-          lat,
-          lon,
-        });
-      });
-    }
+  app.get("/:username", isAuthenticated, function (req, res) {
+    db.Users.findOne({
+      where: {
+        username: req.params.username,
+      },
+    }).then(function (dbGet) {
+      console.log("dbGet", dbGet);
+
+      res.render("profileEdit", { Authenticated: false, userID: dbGet.id });
+    });
   });
 };

@@ -3,7 +3,7 @@ var express = require("express");
 var session = require("express-session");
 
 require("dotenv").config();
-var PORT = process.env.PORT || process.env.DB_PORT;
+var PORT = process.env.PORT || 9000;
 
 var path = require("path");
 

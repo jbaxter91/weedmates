@@ -1,6 +1,6 @@
 $(function () {
     $.ajax({
-        url: "http://localhost:9000/api/matches",
+        url: "/api/matches",
         method: "GET"
     }).then(function (response) {
         console.log(response);

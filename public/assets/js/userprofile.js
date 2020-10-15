@@ -11,8 +11,9 @@ $(document).ready(function () {
   renderProfile();
 
   function renderProfile() {
-    $.get("/api/user-data").then(function (data) {
-      console.log("Data", data);
+    let query = `/api/user-data/${userID}`;
+    console.log(query);
+    $.get(query).then(function (data) {
       usernameEle.val(data.username);
       locationEle.val(data.city + data.state + data.country);
       descEle.val(data.description);
@@ -34,19 +35,15 @@ $(document).ready(function () {
   }
 
   saveBtn.on("click", () => {
-    console.log("Clicky!");
     let weed_prefs = "";
-    if(indicaEle.is(':checked'))
-    {
-        weed_prefs += "Indica,";
+    if (indicaEle.is(":checked")) {
+      weed_prefs += "Indica,";
     }
-    if(hybridEle.is(':checked'))
-    {
-        weed_prefs += "Hybrid,";
+    if (hybridEle.is(":checked")) {
+      weed_prefs += "Hybrid,";
     }
-    if(sativaEle.is(':checked'))
-    {
-        weed_prefs += "Sativa";
+    if (sativaEle.is(":checked")) {
+      weed_prefs += "Sativa";
     }
     let userData = {
       id: userID,
@@ -55,12 +52,13 @@ $(document).ready(function () {
       description: descEle.val(),
     };
 
+    let putQuery = "/api/user-data";
+    console.log("Put call to:", putQuery);
     $.ajax({
-      url: "/api/user-data",
+      url: putQuery,
       type: "PUT",
       data: userData,
-      success: function (data) {
-      },
+      success: function (data) {},
       error: function (request, msg, error) {
         console.log(request, msg, error);
       },

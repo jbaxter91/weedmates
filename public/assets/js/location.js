@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  const userID = $("#userID").attr("data-id");
   var options = {
     enableHighAccuracy: true,
     timeout: 5000,
@@ -8,9 +9,10 @@ $(document).ready(function () {
   function success(pos) {
     var crd = pos.coords;
 
-    $.get("/api/user-data")
+    let query = `/api/user-data/${userID}`;
+    console.log("Location.js", query);
+    $.get(query)
       .then(function (data) {
-        console.log(data);
         data.lat = crd.latitude;
         data.lon = crd.longitude;
         $.ajax({

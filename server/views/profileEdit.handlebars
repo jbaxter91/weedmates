@@ -1,3 +1,4 @@
+<div id="userID" data-id="{{userID}}"></div>
 <div id="profileCont" class="">
     <div class="py-5 bg-black">
         <div class="container">
@@ -20,7 +21,7 @@
                     </div><br>
                 </div>
                 <div id="description" class="col-xs">
-                    <textarea class="text-dark" {{#unless Authenticated}} readonly
+                    <textarea id="descInput" class="text-dark" {{#unless Authenticated}} readonly
                         {{/unless}}> Please add a brief Description of yourself here ... My name is Mary Jane lets smoke!</textarea>
                 </div>
                 <div id="weedPref" class="col-xs">
@@ -41,4 +42,4 @@
 </div>
 
 <script src="/assets/js/userprofile.js"></script>
-<script src="/assets/js/location.js"></script>
+{{#unless Authenticated}}<script src="/assets/js/location.js"></script> {{/unless}}>

@@ -55,7 +55,8 @@ function rebuildUser() {
                 weed_Pref_ele.html(result.weed_pref);
 
             }else{
-                $("#failResult").removeClass("d-none")
+                $("#failCont").removeClass("d-none");
+                $("#userPortal").addClass("d-none")
             }
 
     

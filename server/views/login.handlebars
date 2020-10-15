@@ -1,19 +1,23 @@
-<div class="container">
-    <div class="col-xs-6  ">
-        <div style="display: none" id="alert" class="alert alert-danger" role="alert">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            <span class="sr-only">Error:</span> <span class="msg"></span>
-        </div>
-        <h1>Please Login or Create an account</h1>
-        <form id="login">
-            <label for="email-input">Email:</label>
-            <input type="text" id="email-input" name="email-input" required><br><br>
-            <label for="password-input">Password:</label>
-            <input type="password" id="password-input" name="password-input" required><br><br>
-            <input type="submit" value="Login">
-            <a href="/create">Create an account</a>
-        </form>
+<div id="loginImg">
+    
 
+    <div id="loginCont" class="container">
+        <div class="col-xs-6  ">
+            <div style="display: none" id="alert" class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span> <span class="msg"></span>
+            </div>
+            <h1>Please Login or Create an account</h1>
+            <form id="login" class="bg-light">
+                <label for="email-input">Email:</label>
+                <input type="text" id="email-input" name="email-input" required><br><br>
+                <label for="password-input">Password:</label>
+                <input type="password" id="password-input" name="password-input" required><br><br>
+                <input type="submit" value="Login">
+                <a href="/create">Create an account</a>
+            </form>
+
+        </div>
     </div>
 </div>
 

@@ -6,6 +6,7 @@ $(document).ready(function () {
 
   // When the signup button is clicked, we validate the email and password are not blank
   loginForm.on("submit", function (event) {
+    console.log("Submitting Login");
     event.preventDefault();
     var userData = {
       email: emailInput.val().trim(),

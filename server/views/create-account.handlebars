@@ -1,25 +1,31 @@
-<div id="login" class="container">
-    <div class="col-xs-6  ">
-        <h1>Create an account</h1>
-        <form class="signup" action="">
-            <label for="username">Username:</label>
-            <input type="text" id="uname-input" name="username"><br><br>
-            <label for="fname">First Name:</label>
-            <input type="text" id="fname-input" name="fname"><br><br>
-            <label for="fname">Last Name:</label>
-            <input type="text" id="lname-input" name="lname"><br><br>
-            <label for="password">Password:</label>
-            <input type="password" id="password-input" name="password"><br><br>
-            <label for="email">Email:</label>
-            <input type="text" id="email-input" name="email"><br><br>
-            <label for="photo-input">Profile URL:</label>
-            <input type="text" id="photo-input" name="photo"><br><br>
-            
-            
-            <input type="submit" value="Create">
-        </form>
+<div >
 
+    <div id="creatAcct" class="container bg-light my-auto">
+        <div class="col-xs-6  ">
+            <h1 class="row justify-content-center text-light">Create an account</h1>
+            <form class="login-form" action="">
+                <label class="text-light" for="username">Username:</label>
+                <input type="text" id="uname-input" name="username"><br><br>
+                <label class="text-light" for="fname">First Name:</label>
+                <input type="text" id="fname-input" name="fname"><br><br>
+                <label class="text-light" for="fname">Last Name:</label>
+                <input type="text" id="lname-input" name="lname"><br><br>
+                <label class="text-light" for="password">Password:</label>
+                <input type="password" id="password-input" name="password"><br><br>
+                <label class="text-light" id="createLabel" for="email">Email:</label>
+                <input type="text" id="email-input" name="email"><br><br>
+                {{!-- <label class="text-light" for="photo-input">Profile URL:</label>
+                <input type="text" id="photo-input" name="photo"><br><br> --}}
+
+            <div class="row justify-content-center">
+                <input class="bg-warning" type="submit" value="Create">
+            </div>
+            </form>
+
+        </div>
     </div>
 </div>
+
+
 
 <script src="/assets/js/signup.js"></script>

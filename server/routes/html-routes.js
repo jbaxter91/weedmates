@@ -18,6 +18,7 @@ module.exports = function (app) {
   //if the user is not logged in we want them to log in so we can make sure they are 21
   //if they are logged in we will take them to the user portal
   app.get("/", function (req, res) {
+    console.log("/ Called");
     if (!req.user) {
       //User is not logged in so we need them to log in
       res.render("login");
@@ -28,10 +29,12 @@ module.exports = function (app) {
   });
 
   app.get("/userportal", isAuthenticated, function (req, res) {
-    res.render("userportal");
+    console.log("/userportal Called");
+    res.render("userportal", { userID: req.user.id });
   });
 
   app.get("/login", function (req, res) {
+    console.log("/login Called");
     if (!req.user) {
       //User is not logged in so we need them to log in
       res.render("login");
@@ -43,70 +46,43 @@ module.exports = function (app) {
   });
 
   app.get("/create", function (req, res) {
+    console.log("/create-account Called");
     res.render("create-account");
   });
 
-  app.get("/WeedMates", function (req, res) {
-    res.render("findAmate");
+  app.get("/weedmates", isAuthenticated, function (req, res) {
+    console.log("/weedmates Called");
+    res.render("findAmate", { userID: req.user.id });
   });
 
   app.get("/AboutUs", function (req, res) {
+    console.log("/aboutus Called");
     res.render("landingPage");
   });
-  
-
-
 
   app.get("/profile", isAuthenticated, function (req, res) {
-    if (req.user.id == req.body.id) {
-      res.render("profileEdit",{Authenticated: true});
-    }else{
-      res.render("profileEdit",{Authenticated: false});
+    console.log("/profile Called");
+    if (req.user.id) {
+      res.render("profileEdit", { Authenticated: true, userID: req.user.id });
+    } else {
+      res.render("profileEdit", { Authenticated: false, userID: req.user.id });
     }
   });
 
   // blog route loads blog.html
-  app.get("/:username", function (req, res) {
-    if (!req.user) {
-      //User is not logged in so we need them to log in
-      res.render("login");
+  app.get("/:username", isAuthenticated, function (req, res) {
+    if (req.params.username == "favicon.ico") {
+      //Total Bullshit... this is a temp fix because for SOME reason it keeps sending favicon.ico as the username......
       return;
-    } else {
-      //We ultimatly want to return the handlebars for the
-      //profile display
-      db.Users.findOne({
-        where: {
-          username: req.params.username,
-        },
-      }).then(function (dbGet) {
-        let {
-          id,
-          username,
-          email,
-          weed_pref,
-          description,
-          city,
-          state,
-          country,
-          lat,
-          lon,
-        } = dbGet;
-        res.json({
-          id,
-          username,
-          email,
-          weed_pref,
-          description,
-          city,
-          state,
-          country,
-          lat,
-          lon,
-        });
-      });
     }
+    console.log(`/:username (${req.params.username}) Called`);
+    db.Users.findOne({
+      where: {
+        username: req.params.username,
+      },
+    }).then(function (dbGet) {
+      console.log("dbGet", dbGet);
+      res.render("profileEdit", { Authenticated: false, userID: dbGet.id });
+    });
   });
-
-
-
 };

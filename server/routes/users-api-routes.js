@@ -22,6 +22,7 @@ module.exports = function (app) {
 
   // Get route for retrieving a single post
   app.get("/api/next-user", function (req, res) {
+    console.log("/api/next-user Called");
     if (!req.user) {
       // The user is not logged in, send back an empty object
       res.json({});
@@ -57,7 +58,8 @@ module.exports = function (app) {
   });
 
   // Get route for retrieving a single post
-  app.get("/api/user-data", function (req, res) {
+  app.get("/api/user-data/:id", function (req, res) {
+    console.log(`GET /api/user-data:${req.params.id} Called`);
     if (!req.user) {
       // The user is not logged in, send back an empty object
       res.json({});
@@ -66,7 +68,7 @@ module.exports = function (app) {
       // Sending back a password, even a hashed password, isn't a good idea
       db.Users.findOne({
         include: [db.UserRatings],
-        where: { id: req.user.id },
+        where: { id: req.params.id },
       }).then(function (dbUser) {
         let {
           username,
@@ -94,6 +96,7 @@ module.exports = function (app) {
 
   // DELETE route for deleting posts
   app.delete("/api/user-data", function (req, res) {
+    console.log("DELETE /api/user-data Called");
     if (!req.user) {
       // The user is not logged in, send back an empty object
       res.json({});
@@ -110,6 +113,7 @@ module.exports = function (app) {
 
   // PUT route for updating posts
   app.put("/api/user-data", function (req, res) {
+    console.log("PUT /api/user-data Called");
     if (!req.user) {
       // The user is not logged in, send back an empty object
       res.json({});

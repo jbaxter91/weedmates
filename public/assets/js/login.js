@@ -6,6 +6,7 @@ $(document).ready(function () {
 
   // When the signup button is clicked, we validate the email and password are not blank
   loginForm.on("submit", function (event) {
+    console.log("Submitting Login");
     event.preventDefault();
     var userData = {
       email: emailInput.val().trim(),
@@ -26,7 +27,7 @@ $(document).ready(function () {
   function logUserIn(userdata) {
     $.post("/api/login", userdata)
       .then(function (data) {
-        window.location.replace("/userportal");
+        window.location.replace("/profile");
         // If there's an error, handle it by throwing up a bootstrap alert
       })
       .catch(handleLoginErr);

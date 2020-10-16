@@ -8,15 +8,21 @@ $(function () {
         $("#noUsers").removeClass("d-none");
     }
     else{
-        console.log(response[0].User.username);
+        
       let ulEle = $("<ul>");
       for (let i = 0; i < response.length; i++) {
-        let liEle = $("<li>");
-        let aEle = $("<a>");
-        aEle.attr("href", `/${response[i].User.username}`);
-        aEle.text(response[i].User.username);
-        liEle.append(aEle);
-        ulEle.append(liEle);
+        let query = `/api/user-data/${response[i].initiator_user_id}`;
+        console.log(query);
+        $.get(query).then(function (data) {
+          let liEle = $("<li>");
+          let aEle = $("<a>");
+          aEle.attr("href", `/${data.username}`);
+          aEle.text(data.username);
+          liEle.append(aEle);
+          ulEle.append(liEle);
+          
+          
+        });
       }
       $("#matchedUser").append(ulEle);
     }

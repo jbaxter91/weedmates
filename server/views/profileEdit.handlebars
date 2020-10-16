@@ -25,17 +25,19 @@
                         {{/unless}}> Please add a brief Description of yourself here ... My name is Mary Jane lets smoke!</textarea>
                 </div>
                 <div id="weedPref" class="col-xs">
-                    <input type="checkbox" id="weed1" name="strain1" value="Sativa">
+                    <input type="checkbox" id="weed1" name="strain1" {{#unless Authenticated}} readonly {{/unless}} value="Sativa">
                     <label class="text-light" for="strain1"> Sativa</label><br>
-                    <input type="checkbox" id="weed2" name="strain2" value="Indica">
+                    <input type="checkbox" id="weed2" name="strain2" {{#unless Authenticated}} readonly {{/unless}} value="Indica">
                     <label class="text-light" for="strain2"> Indica</label><br>
-                    <input type="checkbox" id="weed3" name="strain3" value="Hybrid">
+                    <input type="checkbox" id="weed3" name="strain3" {{#unless Authenticated}} readonly {{/unless}} value="Hybrid">
                     <label class="text-light" for="strain3"> Hybrid</label><br>
                     
                 </div>
             </div>
             <div class=" row justify-content-center">
+                {{#unless Authenticated}} 
                 <button id="saveBtn" class="btn-success justify-content-center">Save</button>
+                {{/unless}}
             </div>
         </div>
     </div>

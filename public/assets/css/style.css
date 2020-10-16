@@ -38,6 +38,7 @@ li {
   position: absolute;
   margin-bottom: 0;
   padding-bottom: 0;
+  bottom: 0;
   
 }
 #landingPage{
@@ -71,6 +72,9 @@ input{
 }
 #defaultImg{
   height: 25rem;
+}
+#noMatchimg{
+  margin-bottom: auto;
 }
 /* #loginImg{
   /* background-image: url("https://wallpaperaccess.com/full/784181.jpg");
@@ -186,6 +190,7 @@ input{
 #iFix{
   margin-bottom: 25px;
 }
+
 
 
 

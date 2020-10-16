@@ -1,20 +1,21 @@
-<div class="">
 <div id="userID" data-id="{{userID}}"></div>
-</div>
-<div id="failCont" class="container d-none">
 
-<div class="row justify-content-center bg-danger ">
-    <div id="failResult" class=" col-xs text-light bd-danger">
-        <h1> Hey no new Users for you to match with yet! Try again Later</h1>
+<div id="failCont" class="container d-none">
+    <div class="row justify-content-center bg-danger ">
+        <div id="failResult" class=" col-xs text-light bd-danger">
+            <h1> Hey no new Users for you to match with yet! Try again Later</h1>
+        </div>
     </div>
-</div>
-<div id="noMatchimg" class="row justify-content-center">
-    <img src="https://image.cannabis.wiki/news/istock-1171600388-1573724503-1440w.jpeg" alt="no matches">
+    {{!-- <div id="noMatchimg" class="row justify-content-center">
+        <img src="https://image.cannabis.wiki/news/istock-1171600388-1573724503-1440w.jpeg" alt="no matches">
+    </div> --}}
 </div>
 <div id="userPortal" class="container d-none">
     <div id="products" class="d-flex justify-content-center ">
         <div id="iFix" class="card" style="width: 30rem;">
-            <img  id="defaultImg" class="card-img-top" src="https://images.unsplash.com/photo-1579118459333-b6c080d24b5c?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Card image cap">
+            <img id="defaultImg" class="card-img-top"
+                src="https://images.unsplash.com/photo-1579118459333-b6c080d24b5c?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+                alt="Card image cap">
             <div class="card-body">
                 <h5 id="cardTitle" data-id="" class="card-title">Card title</h5>
                 <p id="userDescription" class="card-text">Some quick example text to build on the card title and make up
@@ -26,7 +27,6 @@
         </div>
     </div>
 </div>
-</div>
 
-    <script src="/assets/js/userprofile.js"></script>
-    <script src="/assets/js/ratingUsers.js"></script>
+<script src="/assets/js/userprofile.js"></script>
+<script src="/assets/js/ratingUsers.js"></script>

@@ -21,7 +21,6 @@ $(function () {
           liEle.append(aEle);
           ulEle.append(liEle);
           
-          
         });
       }
       $("#matchedUser").append(ulEle);

@@ -27,7 +27,7 @@ $(document).ready(function () {
   function logUserIn(userdata) {
     $.post("/api/login", userdata)
       .then(function (data) {
-        window.location.replace("/userportal");
+        window.location.replace("/profile");
         // If there's an error, handle it by throwing up a bootstrap alert
       })
       .catch(handleLoginErr);

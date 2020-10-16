@@ -50,7 +50,7 @@ module.exports = function (app) {
     res.render("create-account");
   });
 
-  app.get("/WeedMates", isAuthenticated, function (req, res) {
+  app.get("/weedmates", isAuthenticated, function (req, res) {
     console.log("/weedmates Called");
     res.render("findAmate", { userID: req.user.id });
   });

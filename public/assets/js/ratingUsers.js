@@ -6,6 +6,13 @@ $(document).ready(function () {
   const dislikedBtn = $("#disliked");
   const weed_Pref_ele = $("userweedPref");
 
+  console.log("ID", userID);
+  console.log("title", title_ele);
+  console.log("desc", user_description_ele);
+  console.log("like", likedBtn);
+  console.log("dislike", dislikedBtn);
+  console.log("pref", weed_Pref_ele);
+
   rebuildUser();
   likedBtn.on("click", () => {
     $.ajax("/api/ratings", {

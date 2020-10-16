@@ -30,7 +30,7 @@ module.exports = function (app) {
 
   app.get("/userportal", isAuthenticated, function (req, res) {
     console.log("/userportal Called");
-    res.render("userportal", {userID: req.user.id});
+    res.render("userportal", { userID: req.user.id });
   });
 
   app.get("/login", function (req, res) {
@@ -52,12 +52,12 @@ module.exports = function (app) {
 
   app.get("/WeedMates", isAuthenticated, function (req, res) {
     console.log("/weedmates Called");
-    res.render("findAmate", {userID: req.user.id});
+    res.render("findAmate", { userID: req.user.id });
   });
 
   app.get("/AboutUs", function (req, res) {
     console.log("/aboutus Called");
-    res.render("landingPage", {userID: req.user.id});
+    res.render("landingPage");
   });
 
   app.get("/profile", isAuthenticated, function (req, res) {
@@ -71,8 +71,7 @@ module.exports = function (app) {
 
   // blog route loads blog.html
   app.get("/:username", isAuthenticated, function (req, res) {
-    if(req.params.username == "favicon.ico")
-    {
+    if (req.params.username == "favicon.ico") {
       //Total Bullshit... this is a temp fix because for SOME reason it keeps sending favicon.ico as the username......
       return;
     }

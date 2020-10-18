@@ -30,6 +30,14 @@ If you want to contribute please contact Chad or John directly
 ## Testing
 No tests
 
+## Images
+### Login Page
+![Weedmates | Login Page](/repo_resources/weedmates-1.png)
+### Profile Page
+![Weedmates | Profile Page](/repo_resources/weedmates-2.png)
+### User Review Page
+![Weedmates | User Review Page](/repo_resources/weedmates-3.png)
+
 ## Credits
 GitHub: 
 * https://www.github.com/jbaxter91

@@ -4,14 +4,9 @@ $(document).ready(function () {
   const user_description_ele = $("#userDescription");
   const likedBtn = $("#liked");
   const dislikedBtn = $("#disliked");
-  const weed_Pref_ele = $("userweedPref");
+  const weed_pref_ele = $("#userweedPref");
 
-  console.log("ID", userID);
-  console.log("title", title_ele);
-  console.log("desc", user_description_ele);
-  console.log("like", likedBtn);
-  console.log("dislike", dislikedBtn);
-  console.log("pref", weed_Pref_ele);
+  console.log(weed_pref_ele);
 
   rebuildUser();
   likedBtn.on("click", () => {
@@ -49,7 +44,8 @@ $(document).ready(function () {
         title_ele.attr("data-id", result.id);
         title_ele.html(result.username);
         user_description_ele.html(result.description);
-        weed_Pref_ele.html(result.weed_pref);
+        let new_pref_ele = $("<div>").html(result.weed_pref); 
+        weed_pref_ele.append(new_pref_ele);
       } else {
         $("#failCont").removeClass("d-none");
         $("#userPortal").addClass("d-none");

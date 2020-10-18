@@ -13,16 +13,16 @@
                     </div>
                     <div>
                         <p id="username" class="text-light"> UserName</p>
-                        <input value="Mary Jane" class="text-dark" {{#unless Authenticated}} readonly {{/unless}} id="usernameInput">
+                        <input value="" class="text-dark" {{#unless Authenticated}} readonly {{/unless}} id="usernameInput">
                     </div><br>
                     <div>
                         <p id="location" class="text-light"> Location</p>
-                        <input value="add Location" class="text-dark" {{#unless Authenticated}} readonly {{/unless}} id="locationInput">
+                        <input value="" class="text-dark" {{#unless Authenticated}} readonly {{/unless}} id="locationInput">
                     </div><br>
                 </div>
                 <div id="description" class="col-xs">
                     <textarea id="descInput" class="text-dark" {{#unless Authenticated}} readonly
-                        {{/unless}}> Please add a brief Description of yourself here ... My name is Mary Jane lets smoke!</textarea>
+                        {{/unless}}> </textarea>
                 </div>
                 <div id="weedPref" class="col-xs">
                     <input type="checkbox" id="weed1" name="strain1" {{#unless Authenticated}} readonly {{/unless}} value="Sativa">

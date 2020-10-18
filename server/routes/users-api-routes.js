@@ -44,6 +44,7 @@ module.exports = function (app) {
               [Op.notIn]: ratedAlready,
             },
           },
+          attributes: ["description", "id", "username", "weed_pref"],
           order: [
             ["lat", "DESC"],
             ["lon", "ASC"],
@@ -80,8 +81,7 @@ module.exports = function (app) {
           photo_urls,
         } = dbUser;
         res.json({
-          email: req.user.email,
-          id: req.user.id,
+          id: req.params.id,
           username,
           weed_pref,
           description,

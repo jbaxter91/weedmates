@@ -38,6 +38,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     description: {
       type: DataTypes.STRING,
+      defaultValue: "Please add a brief Description of yourself here ... My name is Mary Jane lets smoke!",
       validate: {
         len: [0, 255],
       },

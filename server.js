@@ -1,4 +1,5 @@
 var express = require("express");
+var compression = require("compression");
 
 var session = require("express-session");
 
@@ -16,6 +17,7 @@ var passport = require("./server/config/passport");
 
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static("public"));
+app.use(compression());
 // We need to use sessions to keep track of our user's login status
 app.use(
   session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
